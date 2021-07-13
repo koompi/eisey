@@ -1,11 +1,11 @@
 [Desktop Entry]
 Version=1.0
 Type=Application
-Exec=/home/brilliant/Projects/ezk/fix.sh %u
-Icon=vncviewer
+Exec=/usr/bin/sel %u
+Icon=/usr/share/icons/koompi/koompi.svg
 StartupNotify=true
 Terminal=false
 Categories=Utility;
 MimeType=x-scheme-handler/ezk
-Name=EZK
-Comment=Launch EZK
+Name=Sel
+Comment=Launch Sel
