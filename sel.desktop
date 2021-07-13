@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Exec=/home/brilliant/Projects/ezk/fix.sh %u
+Icon=vncviewer
+StartupNotify=true
+Terminal=false
+Categories=Utility;
+MimeType=x-scheme-handler/ezk
+Name=EZK
+Comment=Launch EZK

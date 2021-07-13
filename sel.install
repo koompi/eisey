@@ -1,0 +1,15 @@
+#!/bin/bash
+
+post_install() {
+    xdg-desktop-menu install /usr/share/applications/sel.desktop --novendor
+    xdg-settings set default-url-scheme-handler koompi sel.desktop
+}
+
+pre_upgrade() {
+    xdg-desktop-menu install /usr/share/applications/sel.desktop --novendor
+    xdg-settings set default-url-scheme-handler koompi sel.desktop
+}
+
+post_remove() {
+    xdg-desktop-menu uninstall /usr/share/applications/sel.desktop
+}

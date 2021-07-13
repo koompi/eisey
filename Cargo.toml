@@ -1,0 +1,14 @@
+[package]
+name = "sel"
+version = "0.1.0"
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+subprocess = "*"
+serde = { version="*", features = ["derive"] }
+serde_yaml = "*"
+strum = "*"
+strum_macros = "*"
+url = "*"
