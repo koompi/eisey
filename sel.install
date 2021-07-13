@@ -3,13 +3,18 @@
 post_install() {
     xdg-desktop-menu install /usr/share/applications/sel.desktop --novendor
     xdg-settings set default-url-scheme-handler koompi sel.desktop
+    grep "koompi=sel.desktop" /usr/share/applications/mimeapps.list
+    [[ $? == 1 ]] && echo -e "\nx-scheme-handler/koompi=sel.desktop\n" | tee -a /usr/share/applications/mimeapps.list
 }
 
 pre_upgrade() {
     xdg-desktop-menu install /usr/share/applications/sel.desktop --novendor
     xdg-settings set default-url-scheme-handler koompi sel.desktop
+    grep "koompi=sel.desktop" /usr/share/applications/mimeapps.list
+    [[ $? == 1 ]] && echo -e "\nx-scheme-handler/koompi=sel.desktop\n" | tee -a /usr/share/applications/mimeapps.list
 }
 
 post_remove() {
     xdg-desktop-menu uninstall /usr/share/applications/sel.desktop
+    sed -i "/koompi=sel.desktop/d" /usr/share/applications/mimeapps.list
 }
