@@ -6,6 +6,6 @@ Icon=/usr/share/icons/koompi/koompi.svg
 StartupNotify=true
 Terminal=false
 Categories=Utility;
-MimeType=x-scheme-handler/ezk
+MimeType=x-scheme-handler/koompi
 Name=Sel
 Comment=Launch Sel
