@@ -19,7 +19,13 @@ fn main() -> Result<()> {
             match domain {
                 "downgrade" => {}
                 "maintenance" => {
-                    let file = File::open("operation.yml")?;
+                    let file_path = if cfg!(debug_assertions) {
+                        "operation.yml"
+                    } else {
+                        "/usr/share/org.koompi.sel/operation.yml"
+                    };
+
+                    let file = File::open(file_path)?;
                     let data: DB = from_reader(file).unwrap();
 
                     if let Some(query) = url_parsed.query() {
