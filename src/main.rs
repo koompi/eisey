@@ -1,6 +1,13 @@
-use std::{env, io::Result};
+use serde::{Deserialize, Serialize};
+use serde_yaml::from_reader;
+use std::{collections::HashMap, env, fs::File, io::Result, path::PathBuf};
 use subprocess::Exec;
 use url::Url;
+
+#[derive(Debug, Default, Serialize, Deserialize)]
+pub struct DB {
+    pub issues: HashMap<String, PathBuf>,
+}
 
 fn main() -> Result<()> {
     let arg = env::args().nth(1);
@@ -11,10 +18,23 @@ fn main() -> Result<()> {
         if let Some(domain) = url_parsed.host_str() {
             match domain {
                 "downgrade" => {}
-                "maintainance" => {
-                    println!("Running maintenance")
+                "maintenance" => {
+                    let file = File::open("operation.yml")?;
+                    let data: DB = from_reader(file).unwrap();
+
+                    if let Some(query) = url_parsed.query() {
+                        let ops = query.strip_prefix("ops=").unwrap();
+                        let ops_list: Vec<String> = ops.split(",").map(|f| f.to_string()).collect();
+                        for op in ops_list.iter() {
+                            if let Some(operation) = data.issues.get(op) {
+                                Exec::shell(format!("{}", operation.to_str().unwrap()))
+                                    .join()
+                                    .unwrap();
+                            }
+                        }
+                    }
                 }
-                "os-upgrade" => {}
+                "os" => {}
                 "pacman" => match url_parsed.path() {
                     "/install" | "/i" => {
                         if let Some(query) = url_parsed.query() {
@@ -115,20 +135,4 @@ fn main() -> Result<()> {
     }
 
     Ok(())
-    // let url_without_protocol = url_with_protocol.strip_prefix("koompi://").unwrap();
-
-    // let url_fragments: Vec<String> = url_without_protocol
-    //     .split("/")
-    //     .map(|f| f.to_string())
-    //     .collect();
-
-    // let domain: String = url_fragments[0].clone();
-    // let paths: Vec<String> = url_fragments
-    //     .iter()
-    //     .skip(1)
-    //     .map(|p| p.to_string())
-    //     .collect();
-
-    // println!("DOMAIN: {}", domain);
-    // println!("PATHS: {:?}", paths);
 }

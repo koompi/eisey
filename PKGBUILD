@@ -2,7 +2,7 @@
 pkgname=sel
 pkgver=0.1.0
 pkgrel=1
-pkgdesc="Simply package management and maintenance in KOOMPI OS"
+pkgdesc="Simplify package management and maintenance in KOOMPI OS"
 arch=('x86_64')
 license=('GPL3')
 source=('git+https://github.com/koompi/sel.git')
