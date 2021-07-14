@@ -1,9 +1,0 @@
----
-issues:
-  clean_pacman_cache: maintenance/clean_pacman_cache.sh
-  refresher_all: maintenance/refresher_all.sh
-  refresher_widget: maintenance/refresher_widget.sh
-  refresher_panel: maintenance/refresher_panel.sh
-  update_grub: maintenance/update_grub.sh
-  install_grub: maintenance/install_grub.sh
-  koompi_kernel: "konsole -e sh -c maintenance/koompi_kernel.sh"
