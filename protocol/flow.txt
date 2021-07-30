@@ -1,0 +1,7 @@
+1. User create KOOMPI Account
+    Account {
+        email
+        password
+        
+        public_key
+    }

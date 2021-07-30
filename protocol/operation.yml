@@ -1,0 +1,19 @@
+---
+issues:
+  # grub
+  grub_update: "konsole -e sh -c maintenance/grub.install.sh"
+  grub_install_efi: "konsole -e sh -c maintenance/grub.install.efi.sh"
+  grub_install_bios: "konsole -e sh -c maintenance/grub.install.bios.sh"
+  # kernel
+  kernel_koompi: "konsole -e sh -c maintenance/kernel.koompi.sh"
+  kernel_arch: "konsole -e sh -c maintenance/kernel.arch.sh"
+  kernel_lts: "konsole -e sh -c maintenance/kernel.lts.sh"
+  kernel_zen: "konsole -e sh -c maintenance/kernel.zen.sh"
+  # pacman
+  pacman_cache: "konsole -e sh -c maintenance/pacman.cache.sh"
+  pacman_reinstall_all: "konsole -e sh -c maintenance/pacman.reinstall.all.sh"
+  # plasma
+  plasma_refresh_all: "konsole -e sh -c maintenance/plasma.refresh.all.sh"
+  plasma_refresh_panel: "konsole -e sh -c maintenance/plasma.refresh.panel.sh"
+  plasma_refresh_widget: "konsole -e sh -c maintenance/plasma.refresh.widget.sh"
+  plasma_restore_default: "konsole -e sh -c maintenance/plasma.restore.default.sh"

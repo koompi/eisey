@@ -1,0 +1,24 @@
+[package]
+name = "protocol"
+version = "0.1.0"
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[[bin]]
+name = "gendb"
+
+[[bin]]
+name = "issuer"
+
+[dependencies]
+subprocess = "*"
+url = "*"
+serde = {version="*", features=["derive"]}
+serde_yaml = "*"
+rsa = "*"
+bip32 = "*"
+rand_core = { version = "0.6", features = ["std"] }
+k256 = "*"
+sha2 = "*"
+pem = "*"
+base64 = "*"
