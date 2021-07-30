@@ -81,7 +81,10 @@ pub fn verify_bytes(singnature: &[u8], input: &[u8]) -> Result<(), Error> {
     let new_sig: Signature = Signature::from_bytes(singnature).unwrap();
     // read public key
     let mut pubkey_string = String::new();
+    #[cfg(debug_assertions)]
     let mut pubkey_file = File::open("pub.key").unwrap();
+    #[cfg(not(debug_assertions))]
+    let mut pubkey_file = File::open("/usr/share/org.koompi.sel/pub.key").unwrap();
     pubkey_file.read_to_string(&mut pubkey_string).unwrap();
     let pubkey: ExtendedPublicKey<VerifyingKey> =
         ExtendedPublicKey::from_str(&pubkey_string).unwrap();
