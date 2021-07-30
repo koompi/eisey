@@ -1,2 +1,3 @@
 [workspace]
 members = ["protocol", "backend"]
+default-members = ["protocol"]

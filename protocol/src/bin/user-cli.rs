@@ -4,8 +4,8 @@ use std::{collections::HashMap, env, fs::File, io::Result, path::PathBuf};
 use subprocess::Exec;
 use url::Url;
 
-pub mod bip32_sec;
-pub mod rsa_sec;
+use protocol::bip32_sec;
+use protocol::rsa_sec;
 
 #[derive(Debug, Default, Serialize, Deserialize)]
 pub struct DB {

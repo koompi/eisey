@@ -8,7 +8,13 @@ edition = "2018"
 name = "gendb"
 
 [[bin]]
-name = "issuer"
+name = "issuer-cli"
+
+[[bin]]
+name = "user-cli"
+
+[[bin]]
+name = "user-gui"
 
 [dependencies]
 subprocess = "*"
@@ -22,3 +28,17 @@ k256 = "*"
 sha2 = "*"
 pem = "*"
 base64 = "*"
+# UI
+webkit2gtk = { version = "*", features=["v2_8", "v2_6", "v2_4", "v2_22"], default-features = false}
+glib = "*"
+gtk = "*"
+actix-web = "*"
+actix-rt = "*"
+mime_guess = "*"
+rust-embed = "*"
+gio = "*"
+gdk = "*"
+
+glib-sys = "*"
+webkit2gtk-sys = "*"
+gobject-sys = "*" 

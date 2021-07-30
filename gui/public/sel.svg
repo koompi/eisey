@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="512"
+   height="512"
+   viewBox="0 0 135.46666 135.46667"
+   version="1.1"
+   id="svg897"
+   inkscape:version="1.1 (c4e8f9ed74, 2021-05-24)"
+   sodipodi:docname="sel.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview899"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     units="px"
+     inkscape:zoom="1.1759259"
+     inkscape:cx="90.566931"
+     inkscape:cy="225.77953"
+     inkscape:window-width="1920"
+     inkscape:window-height="1004"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs894" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#373e48;stroke:#d45500;stroke-width:0.538305;stroke-linecap:round;paint-order:markers stroke fill"
+       id="rect863"
+       width="134.79868"
+       height="135.4287"
+       x="0.33399555"
+       y="0.018985493"
+       ry="36.65313" />
+    <g
+       id="g871"
+       transform="matrix(4.2579588,-3.6285663,3.872634,3.9896066,-569.52815,-85.055863)">
+      <rect
+         style="fill:#502d16;stroke-width:0.264583"
+         id="rect321"
+         width="0.91129148"
+         height="16.371813"
+         x="61.985729"
+         y="92.157082" />
+      <rect
+         style="fill:#d4aa00;stroke-width:0.123183"
+         id="rect321-6"
+         width="0.91129148"
+         height="3.5487204"
+         x="61.985729"
+         y="105.27869"
+         ry="0.22782274" />
+      <rect
+         style="fill:#803300;stroke-width:0.264583"
+         id="rect512"
+         width="0.21996647"
+         height="10.338437"
+         x="62.519939"
+         y="95.340912"
+         ry="0.10998324" />
+    </g>
+    <g
+       id="g275"
+       transform="matrix(6.6884159,0,0,6.6884159,-459.64744,-608.74756)">
+      <g
+         id="g21"
+         transform="matrix(0.26458333,0,0,0.26458333,71.490693,94.262664)"
+         style="fill:#aa8800">
+        <g
+           id="g19"
+           style="fill:#aa8800">
+          <path
+             class="st0"
+             d="m 18,0 v 11.2 c 0,2.6 2.1,4.8 4.8,4.8 H 34 C 26.4,13.6 20.4,7.6 18,0 Z"
+             id="path11"
+             style="fill:#aa8800" />
+          <path
+             class="st0"
+             d="M 18,34 V 22.5 C 18,20 20,18 22.5,18 H 34 c -7.6,2.4 -13.6,8.4 -16,16 z"
+             id="path13"
+             style="fill:#aa8800" />
+          <path
+             class="st0"
+             d="M 16,0 V 11.5 C 16,14 14,16 11.5,16 H 0 C 7.6,13.6 13.6,7.6 16,0 Z"
+             id="path15"
+             style="fill:#aa8800" />
+          <path
+             class="st0"
+             d="M 16,34 V 22.5 C 16,20 14,18 11.5,18 H 0 c 7.6,2.4 13.6,8.4 16,16 z"
+             id="path17"
+             style="fill:#aa8800" />
+        </g>
+      </g>
+      <g
+         id="g260">
+        <g
+           id="g21-3"
+           transform="matrix(0.23500797,0,0,0.23500797,71.993474,94.765445)"
+           style="fill:#d4aa00">
+          <g
+             id="g19-6"
+             style="fill:#d4aa00">
+            <path
+               class="st0"
+               d="m 18,0 v 11.2 c 0,2.6 2.1,4.8 4.8,4.8 H 34 C 26.4,13.6 20.4,7.6 18,0 Z"
+               id="path11-7"
+               style="fill:#d4aa00" />
+            <path
+               class="st0"
+               d="M 18,34 V 22.5 C 18,20 20,18 22.5,18 H 34 c -7.6,2.4 -13.6,8.4 -16,16 z"
+               id="path13-5"
+               style="fill:#d4aa00" />
+            <path
+               class="st0"
+               d="M 16,0 V 11.5 C 16,14 14,16 11.5,16 H 0 C 7.6,13.6 13.6,7.6 16,0 Z"
+               id="path15-3"
+               style="fill:#d4aa00" />
+            <path
+               class="st0"
+               d="M 16,34 V 22.5 C 16,20 14,18 11.5,18 H 0 c 7.6,2.4 13.6,8.4 16,16 z"
+               id="path17-5"
+               style="fill:#d4aa00" />
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
