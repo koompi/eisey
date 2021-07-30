@@ -1,10 +1,12 @@
 [Desktop Entry]
 Version=1.0
 Type=Application
-Exec=/usr/bin/sel-wallet %u
+Exec=/usr/bin/sel-protocol %u
 Icon=/usr/share/icons/koompi/sel.svg
 StartupNotify=true
 Terminal=false
 Categories=Utility;
-Name=Sel Wallet
-Comment=Launch Sel Wallet
+MimeType=x-scheme-handler/sel
+Name=Sel Protocol
+Comment=Launch Sel Protocol
+NoDisplay=true
