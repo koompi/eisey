@@ -29,8 +29,9 @@ package() {
 
     install -Dm755 $srcdir/sel/target/release/user-cli $pkgdir/usr/bin/sel-protocol
     install -Dm755 $srcdir/sel/target/release/user-gui $pkgdir/usr/bin/sel-wallet
-    install -Dm755 $srcdir/sel/target/release/issuer $pkgdir/usr/bin/sel-issuer
+    install -Dm755 $srcdir/sel/target/release/issuer-cli $pkgdir/usr/bin/sel-issuer
     install -Dm644 $srcdir/sel/sel.desktop $pkgdir/usr/share/applications/sel.desktop
+    install -Dm644 $srcdir/sel/sel-protocol.desktop $pkgdir/usr/share/applications/sel-protocol.desktop
     install -Dm755 $srcdir/sel/maintenance/*.sh $pkgdir/usr/share/org.koompi.sel/maintenance/
     install -Dm644 $srcdir/sel/operation.yml $pkgdir/usr/share/org.koompi.sel/
     install -Dm644 $srcdir/sel/gui/build/sel.svg $pkgdir/usr/share/icons/koompi/sel.svg
