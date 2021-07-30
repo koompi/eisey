@@ -21,58 +21,62 @@ fn main() -> Result<()> {
     let arg = env::args().nth(1);
     let url_with_protocol = arg.unwrap_or(String::new());
     let url_parsed = Url::parse(&url_with_protocol).unwrap();
-
+    // println!("{:#?}", &url_parsed);
+    let cert_path = &url_parsed.path();
+    println!("cert path: {:?}", cert_path);
     let hash_query: HashMap<_, _> = url_parsed.query_pairs().into_owned().collect();
 
     let cmd: Option<_> = hash_query.get("cmd");
-    let cert: Option<_> = hash_query.get("cert");
+    // let cert: Option<_> = hash_query.get("cert");
 
     #[cfg(debug_assertions)]
     {
         println!("");
         println!("cmd: {:?}", cmd);
         println!("");
-        println!("cert: {:?}", cert);
+        // println!("cert: {:?}", cert);
     }
-
-    if let Some(cert) = cert {
-        // convert cert from base64
-        let cert_byte = base64::decode_config(cert, base64::URL_SAFE_NO_PAD);
-        if let Some(cmd) = cmd {
-            let cmd_byte = base64::decode_config(cmd, base64::URL_SAFE_NO_PAD);
-            match bip32_sec::verify_bytes(
-                cert_byte.unwrap().as_slice(),
-                &cmd_byte.clone().unwrap().as_slice(),
-            ) {
-                Ok(_) => {
-                    let cmd = rsa_sec::rsa_decrypt(cmd_byte.unwrap());
-                    match cmd {
-                        Ok(cmd) => {
-                            match std::str::from_utf8(cmd.as_slice()) {
-                                Ok(v) => {
-                                    // println!("command: {}", v);
-                                    let url = Url::parse(v).unwrap();
-                                    runner(url).unwrap();
-                                }
-                                Err(e) => panic!("Invalid UTF-8 sequence: {}", e),
-                            };
-                        }
-                        Err(e) => {
-                            println!("Unable to decrypt command.");
-                            println!("{}", e.to_string());
+    if !cert_path.is_empty() {
+        let cert = cert_path.strip_prefix("/");
+        if let Some(cert) = cert {
+            // convert cert from base64
+            let cert_byte = base64::decode_config(cert, base64::URL_SAFE_NO_PAD);
+            if let Some(cmd) = cmd {
+                let cmd_byte = base64::decode_config(cmd, base64::URL_SAFE_NO_PAD);
+                match bip32_sec::verify_bytes(
+                    cert_byte.unwrap().as_slice(),
+                    &cmd_byte.clone().unwrap().as_slice(),
+                ) {
+                    Ok(_) => {
+                        let cmd = rsa_sec::rsa_decrypt(cmd_byte.unwrap());
+                        match cmd {
+                            Ok(cmd) => {
+                                match std::str::from_utf8(cmd.as_slice()) {
+                                    Ok(v) => {
+                                        // println!("command: {}", v);
+                                        let url = Url::parse(v).unwrap();
+                                        runner(url).unwrap();
+                                    }
+                                    Err(e) => panic!("Invalid UTF-8 sequence: {}", e),
+                                };
+                            }
+                            Err(e) => {
+                                println!("Unable to decrypt command.");
+                                println!("{}", e.to_string());
+                            }
                         }
                     }
+                    Err(e) => {
+                        println!("Invalid certificate");
+                        println!("{}", e.to_string())
+                    }
                 }
-                Err(e) => {
-                    println!("Invalid certificate");
-                    println!("{}", e.to_string())
-                }
+            } else {
+                println!("Encrypted command required.")
             }
         } else {
-            println!("Encrypted command required.")
+            println!("Certificate signed by KOOMPI is required.")
         }
-    } else {
-        println!("Certificate signed by KOOMPI is required.")
     }
 
     Ok(())

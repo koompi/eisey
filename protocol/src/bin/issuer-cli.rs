@@ -29,7 +29,7 @@ fn main() {
             let sigb = sign_byte(&enc_input);
             let sigb_str = base64::encode_config(sigb, base64::URL_SAFE_NO_PAD);
 
-            println!("sel://init?cmd={}&cert={}", &enc_str, &sigb_str);
+            println!("sel://init/{}?cmd={}", &sigb_str, &enc_str);
         }
         _ => {}
     }
