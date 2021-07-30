@@ -21,7 +21,7 @@ subprocess = "*"
 url = "*"
 serde = {version="*", features=["derive"]}
 serde_yaml = "*"
-rsa = "*"
+rsa = "0.4.1"
 bip32 = "*"
 rand_core = { version = "0.6", features = ["std"] }
 k256 = "*"

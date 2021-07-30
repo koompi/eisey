@@ -82,7 +82,7 @@ pub fn runner(url_parsed: Url) -> Result<()> {
     let hash_query: HashMap<_, _> = url_parsed.query_pairs().into_owned().collect();
     let apps: Option<_> = hash_query.get("apps");
     let ops: Option<_> = hash_query.get("ops");
-    if url_parsed.scheme() == "koompi" {
+    if url_parsed.scheme() == "sel" {
         if let Some(domain) = url_parsed.host_str() {
             match domain {
                 "downgrade" => {}
