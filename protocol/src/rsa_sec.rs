@@ -52,10 +52,10 @@ pub fn rsa_encrypt(data: String) -> Result<Vec<u8>, rsa::errors::Error> {
     let sel_dir = env::home_dir().unwrap().join(".sel");
     #[cfg(not(debug_assertions))]
     if !sel_dir.exists() {
-        create_dir_all(sel_dir).unwrap()
+        create_dir_all(&sel_dir).unwrap()
     }
     #[cfg(not(debug_assertions))]
-    let mut public_key_file = File::open(sel_dir.join("user_public.pem")).unwrap();
+    let mut public_key_file = File::open(&sel_dir.join("user_public.pem")).unwrap();
 
     public_key_file.read_to_end(&mut bufs).unwrap();
     let public_key = RSAPublicKey::from_pkcs8(&bufs).unwrap();
@@ -81,7 +81,7 @@ pub fn rsa_keygen() {
     let sel_dir = env::home_dir().unwrap().join(".sel");
     #[cfg(not(debug_assertions))]
     if !sel_dir.exists() {
-        create_dir_all(sel_dir).unwrap()
+        create_dir_all(&sel_dir).unwrap()
     }
     let bits = 1024;
     let private_key = RSAPrivateKey::new(&mut rng, bits).expect("failed to generate a key");
@@ -96,7 +96,7 @@ pub fn rsa_keygen() {
     #[cfg(debug_assertions)]
     let mut private_key_file = File::create("user_private.pem").unwrap();
     #[cfg(not(debug_assertions))]
-    let mut private_key_file = File::create(sel_dir.join("user_private.pem")).unwrap();
+    let mut private_key_file = File::create(&sel_dir.join("user_private.pem")).unwrap();
     private_key_file
         .write_all(private_key_string.unwrap().as_bytes())
         .unwrap();
@@ -104,7 +104,7 @@ pub fn rsa_keygen() {
     #[cfg(debug_assertions)]
     let mut public_key_file = File::create("user_public.pem").unwrap();
     #[cfg(not(debug_assertions))]
-    let mut public_key_file = File::create(sel_dir.join("/user_public.pem")).unwrap();
+    let mut public_key_file = File::create(&sel_dir.join("/user_public.pem")).unwrap();
     public_key_file
         .write_all(public_key_string.unwrap().as_bytes())
         .unwrap();
