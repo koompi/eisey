@@ -6,7 +6,8 @@ pkgdesc="Simplify package management and maintenance in KOOMPI OS"
 arch=('x86_64')
 license=('GPL3')
 source=('git+https://github.com/koompi/sel.git')
-depends=('glibc' 'rustup' 'gnupg' 'pgpme' 'xdg-utils')
+sha256sums=('SKIP')
+depends=('glibc' 'rustup' 'gnupg' 'xdg-utils')
 makedepends=('nodejs' 'npm')
 install=$pkgname.install
 
