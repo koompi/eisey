@@ -1,7 +1,6 @@
 import { Switch, Route, Redirect } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
 import Home from "./Home";
-import SignUp from "./SignUp";
 import SignIn from "./SignIn";
 
 const queryClient = new QueryClient();
