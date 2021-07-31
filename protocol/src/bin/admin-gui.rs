@@ -32,7 +32,7 @@ use std::fs::create_dir_all;
 use std::path::Path;
 
 #[derive(RustEmbed)]
-#[folder = "../gui-client/build"]
+#[folder = "../gui-admin/build"]
 struct Asset;
 
 fn assets(req: HttpRequest) -> HttpResponse {
@@ -63,7 +63,7 @@ fn run_actix(server_tx: mpsc::Sender<Server>, port_tx: mpsc::Sender<u16>) -> std
 
     server.block_on(async move {
         let server = HttpServer::new(|| App::new().service(web::resource("*").to(assets)))
-            .bind("127.3.6.9:3000")?;
+            .bind("127.3.6.9:3001")?;
 
         let port = server.addrs().first().unwrap().port();
         port_tx.send(port.clone()).unwrap();

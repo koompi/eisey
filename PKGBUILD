@@ -17,7 +17,7 @@ package() {
     rustup default stable
     cargo build --release --bin user-cli
     cargo build --release --bin issuer-cli
-    cd $srcdir/sel/gui
+    cd $srcdir/sel/gui-client
     npm install
     npm run build
     cd $srcdir/sel
@@ -34,6 +34,6 @@ package() {
     install -Dm644 $srcdir/sel/sel-protocol.desktop $pkgdir/usr/share/applications/sel-protocol.desktop
     install -Dm755 $srcdir/sel/maintenance/*.sh $pkgdir/usr/share/org.koompi.sel/maintenance/
     install -Dm644 $srcdir/sel/operation.yml $pkgdir/usr/share/org.koompi.sel/
-    install -Dm644 $srcdir/sel/gui/build/sel.svg $pkgdir/usr/share/icons/koompi/sel.svg
+    install -Dm644 $srcdir/sel/gui-client/build/sel.svg $pkgdir/usr/share/icons/koompi/sel.svg
 
 }

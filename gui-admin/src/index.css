@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#root {
+  @apply w-screen h-screen overflow-hidden;
+}
+.App {
+  @apply w-screen h-screen bg-gray-900 text-white;
+}
+.SignUp {
+  @apply w-screen grid p-8 grid-cols-1 gap-8 items-center justify-center content-center text-center;
+}

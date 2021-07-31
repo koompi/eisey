@@ -16,6 +16,9 @@ name = "user-cli"
 [[bin]]
 name = "user-gui"
 
+[[bin]]
+name = "admin-gui"
+
 [dependencies]
 subprocess = "*"
 url = "*"

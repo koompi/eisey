@@ -100,6 +100,13 @@ pub enum AppError {
     SignInError(SignInError),
     DatabaseError(wither::WitherError),
     InvalidToken,
+    InvalidPublicKey(InvalidPublicKey),
+}
+
+pub enum InvalidPublicKey {
+    InvalidBase64,
+    InvalidRSA,
+    Others(String),
 }
 
 pub enum SignInError {
@@ -310,12 +317,28 @@ pub async fn sign_address(
         if validate_token(&data.token).is_ok() {
             let input = data.url.clone();
             let user_pub = &data.user_pub_key;
-            let enc_input = rsa_encrypt(input, &user_pub).unwrap();
-            let enc_str = base64::encode_config(&enc_input, base64::URL_SAFE_NO_PAD);
-            let sigb = sign_byte(&enc_input);
-            let sigb_str = base64::encode_config(&sigb, base64::URL_SAFE_NO_PAD);
-
-            format!("sel://init/{}?cmd={}", &sigb_str, &enc_str)
+            let enc_input = rsa_encrypt(input, &user_pub);
+            match enc_input {
+                Ok(enc_input) => {
+                    let enc_str = base64::encode_config(&enc_input, base64::URL_SAFE_NO_PAD);
+                    let sigb = sign_byte(&enc_input);
+                    let sigb_str = base64::encode_config(&sigb, base64::URL_SAFE_NO_PAD);
+                    #[cfg(debug_assertions)]
+                    return format!("http://localhost:8080/init/{}/{}", &sigb_str, &enc_str);
+                    #[cfg(not(debug_assertions))]
+                    return format!("http://sel.koompi.org/init/{}/{}", &sigb_str, &enc_str);
+                }
+                Err(e) => match e {
+                    AppError::InvalidPublicKey(k) => match k {
+                        InvalidPublicKey::InvalidBase64 => {
+                            format!("Invalid based64 format of public key")
+                        }
+                        InvalidPublicKey::InvalidRSA => format!("Invalid RSA public key"),
+                        InvalidPublicKey::Others(s) => format!("Signing error: {}", s),
+                    },
+                    _ => return format!("Unknown error at Signing"),
+                },
+            }
         } else {
             format!("Invalid token")
         }
@@ -385,18 +408,28 @@ async fn main() -> std::io::Result<()> {
     .await
 }
 
-pub fn rsa_encrypt(data: String, pubkey: &str) -> Result<Vec<u8>, rsa::errors::Error> {
+pub fn rsa_encrypt(data: String, pubkey: &str) -> Result<Vec<u8>, AppError> {
     let mut rng = OsRng;
-    let der_bytes = base64::decode(&pubkey).expect("failed to decode base64 content");
+    let der_bytes = base64::decode(&pubkey);
+    match der_bytes {
+        Ok(der_bytes) => {
+            let public_key = RSAPublicKey::from_pkcs8(&der_bytes);
+            match public_key {
+                Ok(public_key) => {
+                    let padding = PaddingScheme::new_oaep::<Sha256>();
+                    let enc_data = public_key.encrypt(&mut rng, padding, data.as_bytes());
 
-    let public_key = RSAPublicKey::from_pkcs8(&der_bytes).unwrap();
-
-    let padding = PaddingScheme::new_oaep::<Sha256>();
-    let enc_data = public_key.encrypt(&mut rng, padding, data.as_bytes());
-
-    match enc_data {
-        Ok(d) => Ok(d),
-        Err(e) => Err(e),
+                    match enc_data {
+                        Ok(d) => Ok(d),
+                        Err(e) => Err(AppError::InvalidPublicKey(InvalidPublicKey::Others(
+                            e.to_string(),
+                        ))),
+                    }
+                }
+                Err(e) => Err(AppError::InvalidPublicKey(InvalidPublicKey::InvalidRSA)),
+            }
+        }
+        Err(e) => Err(AppError::InvalidPublicKey(InvalidPublicKey::InvalidBase64)),
     }
 }
 
