@@ -8,6 +8,9 @@ edition = "2018"
 [dependencies]
 actix-web = "*"
 actix-rt = "*"
+actix-service = "*"
+actix-web-grants = "*"
+actix-web-httpauth = "*"
 serde = { version="*", features=["derive"]}
 serde_json = "*"
 futures = "*"
@@ -15,3 +18,13 @@ wither = "*"
 tokio = "*"
 bcrypt = "*"
 jsonwebtoken = "*"
+chrono = "*"
+dotenv = "*"
+protocol = {path = "../protocol"}
+base64 = "*"
+rsa = "0.4.1"
+rand_core = { version = "0.6", features = ["std"] }
+bip32 = "*"
+k256 = "*"
+sha2 = "0.9.5"
+sha1 = "*"
