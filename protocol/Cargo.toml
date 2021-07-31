@@ -17,7 +17,7 @@ name = "user-cli"
 name = "user-gui"
 
 [[bin]]
-name = "admin-gui"
+name = "issuer-gui"
 
 [dependencies]
 subprocess = "*"

@@ -16,7 +16,7 @@ export default function Home() {
 
   const mutation = useMutation(async (data) => {
     return await axios.post(
-      "/api/sign",
+      "http://localhost:8080/api/sign",
       {
         ...signData,
         token: token,

@@ -9,9 +9,10 @@ export default function SignUp() {
     password: "",
   });
   const mutation = useMutation(async (data) => {
-    return await axios.post("/sign_in", data, {
+    return await axios.post("http://localhost:8080/sign_in", data, {
       headers: {
         "Content-Type": "application/json",
+        credential: "same-origin",
       },
     });
   });

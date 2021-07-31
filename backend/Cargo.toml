@@ -9,6 +9,7 @@ edition = "2018"
 actix-web = "*"
 actix-rt = "*"
 actix-service = "*"
+actix-cors = "*"
 actix-web-grants = "*"
 actix-web-httpauth = "*"
 serde = { version="*", features=["derive"]}

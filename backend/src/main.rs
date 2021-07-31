@@ -1,4 +1,4 @@
-use actix_web::{get, web, App, HttpRequest, HttpServer, Responder};
+use actix_web::{get, http, web, App, HttpRequest, HttpServer, Responder};
 use bcrypt::{hash, verify, DEFAULT_COST};
 use chrono::Utc;
 #[allow(unused_imports)]
@@ -390,7 +390,13 @@ async fn main() -> std::io::Result<()> {
     User::sync(&db).await.unwrap();
 
     HttpServer::new(move || {
+        let cors = actix_cors::Cors::default()
+            .allow_any_origin()
+            .allow_any_header()
+            .allowed_methods(vec!["GET", "POST"])
+            .max_age(3600);
         App::new()
+            .wrap(cors)
             .data(db.clone())
             .service(
                 web::scope("/api")
