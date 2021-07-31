@@ -40,12 +40,13 @@ export default function Home() {
         <textarea
           className="border-4 border-yellow-900 w-full h-auto block bg-transparent p-4 break-all rounded-2xl text-white"
           value={signData.user_pub_key}
-          onChange={(e) =>
+          onChange={(e) => {
             setSignData({
               ...signData,
               user_pub_key: e.target.value,
-            })
-          }
+            });
+            setCp(false);
+          }}
         />
         <div className="">
           <div className="font-bold">COMMAND</div>
@@ -53,12 +54,13 @@ export default function Home() {
         <textarea
           className="border-4 border-yellow-900 w-full h-auto block bg-transparent p-4 break-all rounded-2xl "
           value={signData.url}
-          onChange={(e) =>
+          onChange={(e) => {
             setSignData({
               ...signData,
               url: e.target.value,
-            })
-          }
+            });
+            setCp(false);
+          }}
         />
         <button
           disabled={signData.user_pub_key === "" || signData.url === ""}

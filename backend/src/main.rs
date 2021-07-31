@@ -440,8 +440,10 @@ pub fn rsa_encrypt(data: String, pubkey: &str) -> Result<Vec<u8>, AppError> {
 }
 
 pub fn sign_byte(input: &[u8]) -> Vec<u8> {
+    let k = "PRIVATE";
+    let value = dotenv::var(k).unwrap();
     let mut prv_str = String::new();
-    let mut prv_file = File::open("prv.key").unwrap();
+    let mut prv_file = File::open(&value).unwrap();
     prv_file.read_to_string(&mut prv_str).unwrap();
 
     use bip32::secp256k1::ecdsa::{signature::Signer, Signature};

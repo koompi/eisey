@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Exec=/usr/bin/sel-admin
+Icon=/usr/share/icons/koompi/sel-admin.svg
+StartupNotify=true
+Terminal=false
+Categories=Utility;
+Name=Sel Admin
+Comment=Launch Sel Admin

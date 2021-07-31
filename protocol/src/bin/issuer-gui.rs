@@ -151,7 +151,7 @@ fn main() {
 
     window.resize(app_w, app_h);
     window.set_position(WindowPosition::Center);
-    window.set_title("SEL");
+    window.set_title("SEL Admin");
     #[cfg(debug_assertions)]
     if Path::new("gui/build/sel.svg").exists() {
         window.set_icon_from_file("gui/build/sel.svg").unwrap();
