@@ -89,7 +89,7 @@ export default function Home() {
         )} */}
         {mutation.isLoading ? (
           <label className="text-yellow-700 font-medium p-3 bg-yellow-100 rounded-lg mb-4 break-words block">
-            Logging in...
+            Processing...
           </label>
         ) : (
           <>
