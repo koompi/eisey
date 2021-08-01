@@ -112,6 +112,7 @@ fn main() {
 
     window.set_position(WindowPosition::Center);
     let settings = WebViewExt::settings(&webview).unwrap();
+    #[cfg(debug_assertions)]
     settings.set_enable_developer_extras(true);
     settings.set_enable_html5_local_storage(true);
     settings.set_enable_javascript(true);
