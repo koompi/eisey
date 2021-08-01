@@ -9,7 +9,10 @@ use serde::{Deserialize, Serialize};
 use serde_json;
 use std::env;
 use wither::bson::{doc, oid::ObjectId};
-use wither::mongodb::{Client, Database};
+use wither::mongodb::{
+    options::{ClientOptions, StreamAddress},
+    Client, Database,
+};
 use wither::prelude::*;
 
 // issuer
@@ -47,6 +50,13 @@ pub struct User {
     password: String,
     pub pub_key: String,
 }
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct Register {
+    pub email: String,
+    pub password: String,
+}
+
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Token {
     token: String,
@@ -236,8 +246,14 @@ async fn greet(req: HttpRequest) -> impl Responder {
     format!("Hello {}!", &name)
 }
 
-async fn register(form: web::Json<User>, database: web::Data<Database>) -> impl Responder {
-    let mut user = form.into_inner();
+async fn register(form: web::Json<Register>, database: web::Data<Database>) -> impl Responder {
+    let data = form.into_inner();
+    let mut user = User {
+        id: None,
+        email: data.email,
+        password: data.password,
+        pub_key: String::new(),
+    };
     match user.register(&database).await {
         Ok(user) => serde_json::to_string_pretty(&user).unwrap(),
         Err(e) => e.to_string(),
@@ -383,10 +399,11 @@ async fn to_sel_uri(info: web::Path<Info>) -> actix_web::HttpResponse {
 async fn main() -> std::io::Result<()> {
     use dotenv;
     dotenv::dotenv().ok();
-    let db = Client::with_uri_str("mongodb://localhost:27017/")
-        .await
-        .unwrap()
-        .database("sel");
+    #[cfg(debug_assertions)]
+    let uri = format!("mongodb://localhost:27017/");
+    #[cfg(not(debug_assertions))]
+    let uri = format!("mongodb://localhost:27020/");
+    let db = Client::with_uri_str(&uri).await.unwrap().database("sel");
     User::sync(&db).await.unwrap();
 
     HttpServer::new(move || {
@@ -404,12 +421,12 @@ async fn main() -> std::io::Result<()> {
                     .route("/change_pub_key", web::post().to(change_pubkey))
                     .route("/sign", web::post().to(sign_address)),
             )
-            .route("/", web::get().to(greet))
             .route("/sign_in", web::post().to(sign_in))
             .route("/register", web::post().to(register))
+            .route("/", web::get().to(greet))
             .service(to_sel_uri)
     })
-    .bind(("127.0.0.1", 8080))?
+    .bind(("0.0.0.0", 3690))?
     .run()
     .await
 }
